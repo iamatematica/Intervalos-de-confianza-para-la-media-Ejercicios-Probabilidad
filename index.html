@@ -109,6 +109,11 @@ sub .fr{font-size:.9em;margin:0 .05em} sub .fr>.fn,sub .fr>.fd{padding-left:.2em
 .sq{display:inline-flex;align-items:stretch;vertical-align:middle;margin:0 .08em}
 .sq>svg{width:.6em;min-width:8px;align-self:stretch;height:auto;overflow:visible;flex-shrink:0}
 .sq-b{display:inline-flex;align-items:center;border-top:1.4px solid currentColor;padding:.1em .28em .06em .1em;line-height:1.2;white-space:nowrap}
+.par{display:inline-flex;align-items:stretch;vertical-align:middle;margin:0 .05em}
+.par-w{position:relative;width:.42em;min-width:6px;flex-shrink:0}
+.par-w>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.par-b{display:inline-flex;align-items:center;white-space:nowrap}
+sup.hi{top:-1.25em}
 .bar{display:inline-block;position:relative;line-height:1}
 .bar::before{content:'';position:absolute;left:.06em;right:-.02em;top:.2em;border-top:1.3px solid currentColor}
 .sum{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 .22em 0 .1em;line-height:1}
@@ -196,7 +201,9 @@ figcaption{font-size:13px;color:var(--g600);margin-top:6px;text-align:center;pad
 
 /* ---------- comprobación ---------- */
 .quiz .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:10px 0}
-.quiz .opt{border:1.5px solid var(--g300);background:var(--white);border-radius:10px;padding:10px 12px;font-size:15px;cursor:pointer;color:var(--g800);text-align:center}
+.quiz .opt{border:1.5px solid var(--g300);background:var(--white);border-radius:10px;padding:10px 12px;font-size:15px;cursor:pointer;color:var(--g800);text-align:center;font-family:inherit;line-height:1.45}
+.quiz .opts:has(.opt.long){grid-template-columns:1fr}
+.quiz .opt.long{text-align:left}
 .quiz .opt:hover{border-color:var(--blue)}
 .quiz .opt.ok{border-color:var(--green);background:var(--green-wash);color:var(--green);font-weight:700}
 .quiz .opt.no{border-color:var(--red);background:var(--red-wash);color:var(--red);border-style:dashed}
@@ -222,7 +229,7 @@ figcaption{font-size:13px;color:var(--g600);margin-top:6px;text-align:center;pad
 <div class="brand-title">Intervalos de confianza para la media</div>
 <div class="brand-sub">Probabilidad Aplicada</div>
 </div></div><div class="lab-logo"><div class="lab-name"><span class="bullet"></span><span class="lab">laboratorio</span><span class="best">best</span><span class="ia">-IA</span></div><div class="lab-sub">Prof. Ariel L. Cardozo Delgado</div></div></div></header>
-<div class="tabs-wrap"><div class="tabs-nav" role="tablist" aria-label="Secciones"><button class="tab-btn" role="tab" id="tab-t1" data-tab="t1" aria-controls="t1" aria-selected="true" tabindex="0"><span class="num">1</span>Media y desvío</button><button class="tab-btn" role="tab" id="tab-t2" data-tab="t2" aria-controls="t2" aria-selected="false" tabindex="-1"><span class="num">2</span>De la muestra<span class="lg"> a la población</span></button><button class="tab-btn" role="tab" id="tab-t3" data-tab="t3" aria-controls="t3" aria-selected="false" tabindex="-1"><span class="num">3</span>Confianza y valor z</button><button class="tab-btn" role="tab" id="tab-t4" data-tab="t4" aria-controls="t4" aria-selected="false" tabindex="-1"><span class="num">4</span>El intervalo<span class="lg"> de confianza</span></button><button class="tab-btn sep" role="tab" id="tab-enun" data-tab="enun" aria-controls="enun" aria-selected="false" tabindex="-1">Enunciados</button><button class="tab-btn" role="tab" id="tab-res" data-tab="res" aria-controls="res" aria-selected="false" tabindex="-1">Resoluciones</button></div></div>
+<div class="tabs-wrap"><div class="tabs-nav" role="tablist" aria-label="Secciones"><button class="tab-btn" role="tab" id="tab-t1" data-tab="t1" aria-controls="t1" aria-selected="true" tabindex="0"><span class="num">1</span>Media y desvío</button><button class="tab-btn" role="tab" id="tab-t2" data-tab="t2" aria-controls="t2" aria-selected="false" tabindex="-1"><span class="num">2</span>De la muestra<span class="lg"> a la población</span></button><button class="tab-btn" role="tab" id="tab-t3" data-tab="t3" aria-controls="t3" aria-selected="false" tabindex="-1"><span class="num">3</span>Confianza y valor z</button><button class="tab-btn" role="tab" id="tab-t4" data-tab="t4" aria-controls="t4" aria-selected="false" tabindex="-1"><span class="num">4</span>El intervalo<span class="lg"> de confianza</span></button><button class="tab-btn" role="tab" id="tab-ap" data-tab="ap" aria-controls="ap" aria-selected="false" tabindex="-1"><span class="num">5</span>Para qué sirve</button><button class="tab-btn sep" role="tab" id="tab-enun" data-tab="enun" aria-controls="enun" aria-selected="false" tabindex="-1">Enunciados</button><button class="tab-btn" role="tab" id="tab-res" data-tab="res" aria-controls="res" aria-selected="false" tabindex="-1">Resoluciones</button></div></div>
 <main>
 <div class="tab-content" id="t1" role="tabpanel" aria-labelledby="tab-t1"><div class="banner"><div class="eyebrow">Teoría · 1 de 4</div><h2>Media y desvío de una muestra</h2><p>Dos números resumen un conjunto de datos: uno dice dónde está el centro y el otro, cuánto se dispersan los datos alrededor de ese centro.</p></div><section class="card"><h3><span class="n">1.1</span>La situación</h3>
 <p>Cinco personas usaron una aplicación y se midió cuántos minutos duró la sesión de cada una:</p>
@@ -441,6 +448,101 @@ figcaption{font-size:13px;color:var(--g600);margin-top:6px;text-align:center;pad
 <p><strong>2.</strong> El margen de error es la distancia del centro a cualquiera de los límites:</p>
 <div class="calc" data-t="E = L_{s} − \b{x} = 52 − 50 = 2"></div>
 <p>Las otras opciones: 4 es el ancho total del intervalo, que vale <span class="mi" data-t="2 · E"></span>; 50 es la media de la muestra; 1,96 es un valor crítico, no un margen.</p></div></div></div></section></div>
+<div class="tab-content" id="ap" role="tabpanel" aria-labelledby="tab-ap" hidden><div class="banner"><div class="eyebrow">Aplicaciones</div><h2>Para qué sirve todo esto</h2><p>Dónde se usan la media, el desvío y los intervalos de confianza fuera del aula, qué decisiones permiten tomar y en qué casos no conviene usarlos.</p></div><section class="card"><h3><span class="n">5.1</span>Tres preguntas que aparecen en cualquier trabajo con datos</h3>
+<p>Cada herramienta de las pestañas anteriores responde una pregunta concreta. Son las tres preguntas que se hace cualquiera que tiene que decidir algo a partir de mediciones.</p><div class="tw"><table class="wrap"><thead><tr><th>La pregunta</th><th>La herramienta</th><th>Un ejemplo</th></tr></thead><tbody><tr><td>¿Cuánto vale normalmente?</td><td>la media</td><td>Una página tarda en promedio 200 milisegundos en cargar.</td></tr><tr><td>¿Puedo contar con ese valor, o cambia mucho de una vez a otra?</td><td>el desvío</td><td>Casi siempre tarda entre 190 y 210, o a veces tarda 80 y a veces 600.</td></tr><tr><td>Medí solo una parte: ¿qué puedo afirmar sobre el total, y con cuánta seguridad?</td><td>el intervalo de confianza</td><td>Con 95 % de confianza, el tiempo medio de carga de todas las visitas está entre 195 y 205.</td></tr></tbody></table></div>
+<p>Sin la primera no hay resumen. Sin la segunda, el resumen puede engañar. Sin la tercera, no se sabe cuánto confiar en un número que salió de una muestra.</p></section><section class="card"><h3><span class="n">5.2</span>Para qué sirve calcular la media y el desvío</h3>
+<p>Dos servidores atienden los pedidos de una aplicación. Se midió el tiempo de respuesta, en milisegundos, de cinco pedidos a cada uno.</p><div class="tw"><table class=""><thead><tr><th></th><th>Tiempos medidos</th><th>Media</th><th>Desvío</th></tr></thead><tbody><tr><td>Servidor A</td><td>190 · 200 · 200 · 210 · 200</td><td>200</td><td>7,07</td></tr><tr><td>Servidor B</td><td>80 · 90 · 100 · 110 · 620</td><td>200</td><td>235,05</td></tr></tbody></table></div>
+<p>Los dos tienen la misma media. Quien mire solo la media dirá que son equivalentes. El desvío muestra que no lo son: el servidor A responde siempre en un tiempo parecido, y el B es rápido casi siempre pero cada tanto deja a un usuario esperando más de medio segundo.</p><div class="step"><button class="step-h" data-step aria-expanded="false"><span class="b">VER</span><span class="tt">Las cuentas de los dos servidores</span><span class="ch" aria-hidden="true">▾</span></button><div class="step-b">
+<p><strong>Servidor A.</strong></p>
+<div class="calc" data-t="\b{x} = \f{190 + 200 + 200 + 210 + 200}{5} = \f{1000}{5} = 200"></div>
+<p>Desviaciones: <span class="mi" data-t="190 − 200 = −10"></span>, <span class="mi" data-t="200 − 200 = 0"></span>, <span class="mi" data-t="200 − 200 = 0"></span>, <span class="mi" data-t="210 − 200 = 10"></span>, <span class="mi" data-t="200 − 200 = 0"></span>.</p>
+<div class="calc" data-t="Σ (x − \b{x})^{2} = (−10)^{2} + 0^{2} + 0^{2} + 10^{2} + 0^{2} = 100 + 0 + 0 + 100 + 0 = 200"></div>
+<div class="calc" data-t="s^{2} = \f{200}{5 − 1} = \f{200}{4} = 50      s = \r{50} ≈ 7,07"></div>
+<p><strong>Servidor B.</strong></p>
+<div class="calc" data-t="\b{x} = \f{80 + 90 + 100 + 110 + 620}{5} = \f{1000}{5} = 200"></div>
+<p>Desviaciones: <span class="mi" data-t="80 − 200 = −120"></span>, <span class="mi" data-t="90 − 200 = −110"></span>, <span class="mi" data-t="100 − 200 = −100"></span>, <span class="mi" data-t="110 − 200 = −90"></span>, <span class="mi" data-t="620 − 200 = 420"></span>.</p>
+<div class="calc" data-t="Σ (x − \b{x})^{2} = (−120)^{2} + (−110)^{2} + (−100)^{2} + (−90)^{2} + 420^{2}"></div>
+<div class="calc" data-t="= 14400 + 12100 + 10000 + 8100 + 176400 = 221000"></div>
+<div class="calc" data-t="s^{2} = \f{221000}{5 − 1} = \f{221000}{4} = 55250      s = \r{55250} ≈ 235,05"></div></div></div>
+<h4>Dónde se usa esto</h4>
+<ul>
+<li><strong>Control de calidad.</strong> Una máquina que llena paquetes de 500 gramos tiene que acertar en la media y, además, tener un desvío chico. Con media 500 y desvío 2, casi todos los paquetes salen bien. Con media 500 y desvío 15, muchos salen con de menos y muchos con de más, aunque el promedio sea perfecto.</li>
+<li><strong>Rendimiento de sistemas.</strong> Tiempos de respuesta, consumo de memoria, duración de las sesiones: se informan con su media y su desvío para saber qué esperar y cuánto puede variar.</li>
+<li><strong>Comparar grupos.</strong> Dos cursos con el mismo promedio de notas pueden ser muy distintos: uno parejo y otro con alumnos muy arriba y muy abajo. El desvío lo dice.</li>
+<li><strong>Detectar valores raros.</strong> Un dato que queda a más de dos o tres desvíos de la media merece una segunda mirada: puede ser un error de carga o un caso especial.</li>
+</ul><div class="box err"><div class="lbl">Cuándo la media no conviene</div>
+<p>En el servidor B, cuatro de los cinco pedidos tardaron 110 milisegundos o menos, y sin embargo la media es 200. Un solo valor muy alto la arrastró. Cuando hay unos pocos valores extremos (pasa con los sueldos, los precios de las propiedades o los tiempos de espera), la media deja de representar al caso típico. Ahí conviene informar también la <strong>mediana</strong>, el valor que queda en el centro al ordenar los datos: en el servidor B es 100.</p></div></section><section class="card"><h3><span class="n">5.3</span>Para qué sirve el intervalo de confianza</h3>
+<p>Casi nunca se puede medir todo: no se prueban todas las lamparitas hasta que se queman, no se entrevista a todos los usuarios, no se analiza toda el agua de un río. Se mide una muestra y se quiere hablar del total. El intervalo de confianza es la manera honesta de hacerlo, porque junto con la estimación informa cuánto puede estar fallando.</p><div class="tw"><table class="wrap"><thead><tr><th>Dónde</th><th>Qué se mide en la muestra</th><th>Qué permite afirmar el intervalo</th></tr></thead><tbody><tr><td>Industria</td><td>duración, peso o resistencia de algunas unidades</td><td>si la producción completa cumple con lo que promete el envase</td></tr><tr><td>Desarrollo de software</td><td>tiempo de uso o de carga de algunos usuarios</td><td>cómo se comporta el sistema para todos los usuarios</td></tr><tr><td>Ambiente y salud</td><td>concentración de una sustancia en algunos puntos</td><td>si la media de todo el río o de toda la zona supera un límite</td></tr><tr><td>Encuestas y estudios</td><td>respuestas de algunas personas</td><td>el valor para toda la población, con su margen de error</td></tr><tr><td>Laboratorio</td><td>varias mediciones de la misma magnitud</td><td>el valor verdadero, con la precisión del instrumento</td></tr></tbody></table></div><div class="box doc"><div class="lbl">Un número solo no alcanza</div>
+<p>«Las lamparitas duran 780 horas» y «las lamparitas duran 780 horas, con un margen de 12 horas y 96 % de confianza» no dicen lo mismo. La segunda frase permite decidir; la primera no dice si el 780 salió de probar 3 lamparitas o 3000.</p></div></section><section class="card"><h3><span class="n">5.4</span>Usar el intervalo para decidir</h3>
+<p>El uso más frecuente es comparar el intervalo con un valor de referencia: lo que promete un fabricante, lo que exige una norma, lo que se había medido antes. La regla es simple.</p><div class="box def"><div class="lbl">Regla de lectura</div>
+<ul>
+<li>Si el valor de referencia queda <strong>fuera</strong> del intervalo, los datos no lo respaldan.</li>
+<li>Si queda <strong>dentro</strong>, los datos son compatibles con ese valor, aunque no lo prueban.</li>
+</ul></div>
+<p>Con los ejercicios de la guía, agregándoles una pregunta de decisión:</p><div class="step open"><button class="step-h" data-step aria-expanded="true"><span class="b">CASO 1</span><span class="tt">Las lamparitas: ¿se sostiene lo que dice la caja?</span><span class="ch" aria-hidden="true">▾</span></button><div class="step-b">
+<p>En el ejercicio 3 el intervalo del 96 % para la duración media resultó:</p>
+<div class="calc" data-t="767,75 &lt; μ &lt; 792,25"></div>
+<p>Supongamos que la caja dijera «duración media: 800 horas». El valor 800 queda fuera del intervalo, por arriba. Con 96 % de confianza, la media real es menor que la anunciada: la muestra no respalda lo que dice la caja.</p>
+<p>Si la caja dijera «775 horas», el valor queda dentro del intervalo. Los datos son compatibles con esa afirmación.</p></div></div>
+<div class="step"><button class="step-h" data-step aria-expanded="false"><span class="b">CASO 2</span><span class="tt">El zinc en el río: ¿se supera un límite?</span><span class="ch" aria-hidden="true">▾</span></button><div class="step-b">
+<p>En el ejercicio 2 el intervalo del 99 % para la concentración media resultó:</p>
+<div class="calc" data-t="2,471 &lt; μ &lt; 2,729"></div>
+<p>Supongamos que una norma fijara un máximo de 3 gramos por mililitro para la concentración media. Todo el intervalo queda por debajo de 3: con 99 % de confianza, el río cumple.</p>
+<p>Si el máximo fuera 2,65, el límite cae dentro del intervalo. No se puede asegurar ni que cumple ni que no cumple. La salida es tomar más mediciones: con una muestra más grande el intervalo se angosta y la respuesta se define.</p></div></div>
+<div class="step"><button class="step-h" data-step aria-expanded="false"><span class="b">CASO 3</span><span class="tt">Dos versiones de una aplicación: ¿la diferencia es real?</span><span class="ch" aria-hidden="true">▾</span></button><div class="step-b">
+<p>Es la situación de una prueba A/B. La versión A de una aplicación se mostró a 64 usuarios y la sesión media duró 12,5 minutos. La versión B se mostró a otros 64 y la media fue 14,6 minutos. En los dos casos <span class="mi" data-t="σ = 4"></span>. ¿La versión B retiene más a los usuarios, o la diferencia pudo salir por casualidad?</p>
+<p>El margen de error es el mismo para las dos, porque tienen el mismo <span class="mi" data-t="σ"></span>, el mismo <span class="mi" data-t="n"></span> y el mismo nivel de confianza (95 %):</p>
+<div class="calc" data-t="E = z_{\f{α}{2}} · \f{σ}{\r{n}} = 1,96 · \f{4}{\r{64}} = 1,96 · \f{4}{8} = 1,96 · 0,5 = 0,98"></div>
+<p>Versión A:</p>
+<div class="calc" data-t="L_{i} = 12,5 − 0,98 = 11,52"></div>
+<div class="calc" data-t="L_{s} = 12,5 + 0,98 = 13,48"></div>
+<p>Versión B:</p>
+<div class="calc" data-t="L_{i} = 14,6 − 0,98 = 13,62"></div>
+<div class="calc" data-t="L_{s} = 14,6 + 0,98 = 15,58"></div><figure><svg data-fig="{&quot;rows&quot;: [[&quot;Versión A&quot;, 11.52, 13.48, &quot;#1d6fcc&quot;], [&quot;Versión B&quot;, 13.62, 15.58, &quot;#7c3aed&quot;]], &quot;center&quot;: null, &quot;lo&quot;: 10.5, &quot;hi&quot;: 16.5, &quot;ticks&quot;: [11, 12, 13, 14, 15, 16], &quot;unit&quot;: &quot;minutos&quot;, &quot;dec&quot;: 2}" role="img" aria-label="Los dos intervalos no se tocan: el de A termina en 13,48 y el de B empieza en 13,62."></svg><figcaption>Los dos intervalos no se tocan: el de A termina en 13,48 y el de B empieza en 13,62.</figcaption></figure>
+<p>Los intervalos no se superponen. Aun en el peor caso para B y el mejor para A, B queda arriba. La diferencia no se explica por el azar del muestreo: hay motivos para quedarse con la versión B.</p>
+<p>Si en cambio la versión B hubiera dado una media de 13,2 minutos:</p>
+<div class="calc" data-t="L_{i} = 13,2 − 0,98 = 12,22"></div>
+<div class="calc" data-t="L_{s} = 13,2 + 0,98 = 14,18"></div><figure><svg data-fig="{&quot;rows&quot;: [[&quot;Versión A&quot;, 11.52, 13.48, &quot;#1d6fcc&quot;], [&quot;Versión B&quot;, 12.22, 14.18, &quot;#7c3aed&quot;]], &quot;center&quot;: null, &quot;lo&quot;: 10.5, &quot;hi&quot;: 16.5, &quot;ticks&quot;: [11, 12, 13, 14, 15, 16], &quot;unit&quot;: &quot;minutos&quot;, &quot;dec&quot;: 2}" role="img" aria-label="Ahora los intervalos comparten el tramo que va de 12,22 a 13,48."></svg><figcaption>Ahora los intervalos comparten el tramo que va de 12,22 a 13,48.</figcaption></figure>
+<p>Los intervalos se superponen: hay valores de <span class="mi" data-t="μ"></span> que son compatibles con las dos versiones. Con estos datos no se puede afirmar que B sea mejor. Mirar si los intervalos se tocan es una primera aproximación; la comparación formal entre dos grupos se hace con una prueba de hipótesis.</p></div></div></section><section class="card"><h3><span class="n">5.5</span>Cuándo conviene usarlo y cuándo no</h3><div class="box ok"><div class="lbl">Conviene cuando</div>
+<ul>
+<li>La muestra se eligió <strong>al azar</strong>: cada elemento de la población tuvo la misma posibilidad de ser medido.</li>
+<li>La muestra es grande (<span class="mi" data-t="n ≥ 30"></span>) o la población es aproximadamente normal.</li>
+<li>La variable es un <strong>número que se mide</strong> (tiempo, peso, estatura, concentración) y lo que interesa es su <strong>promedio</strong>.</li>
+<li>Hay que tomar una decisión sobre el total y solo se pudo medir una parte.</li>
+</ul></div><div class="box err"><div class="lbl">No conviene, o hay que tener cuidado, cuando</div>
+<ul>
+<li><strong>La muestra no es aleatoria.</strong> Una encuesta que contestan solo los que quieren, o mediciones hechas solo a los usuarios más activos, da una media corrida. El intervalo mide el error del azar, no el de una muestra mal elegida: puede salir angosto y estar centrado en un valor equivocado.</li>
+<li><strong>La muestra es chica y la población no es normal.</strong> Con 8 o 10 datos de una variable muy asimétrica, la fórmula con <span class="mi" data-t="z"></span> da intervalos más angostos de lo que corresponde.</li>
+<li><strong>Hay valores extremos.</strong> Si la media no representa a los datos (sección 5.2), un intervalo para la media tampoco responde lo que interesa.</li>
+<li><strong>Interesa un caso individual.</strong> El intervalo dice dónde está la media de la población, no dónde va a caer el próximo dato. Que la estatura media esté entre 172,23 y 176,77 centímetros no significa que los estudiantes midan entre esos valores.</li>
+<li><strong>Se midió a toda la población.</strong> Si están los datos de todos, la media que se calcula es <span class="mi" data-t="μ"></span> y no hay nada que estimar.</li>
+<li><strong>La variable no es numérica.</strong> Para «qué porcentaje prefiere la versión B» se usa un intervalo para la proporción, que tiene otra fórmula.</li>
+<li><strong>Los datos no son independientes.</strong> Cien mediciones seguidas del mismo usuario no valen como cien usuarios distintos.</li>
+</ul></div></section><section class="card"><h3><span class="n">5.6</span>Planificar: cuántos datos hacen falta</h3>
+<p>La fórmula del margen de error también sirve antes de medir. Si se sabe qué precisión se necesita, se puede calcular cuántos datos hay que juntar, y así no gastar de más ni quedarse corto.</p>
+<p>Se parte del margen de error y se despeja <span class="mi" data-t="n"></span>:</p>
+<div class="calc" data-t="E = z_{\f{α}{2}} · \f{σ}{\r{n}}"></div>
+<p>Se multiplican los dos miembros por <span class="mi" data-t="\r{n}"></span> y se dividen por <span class="mi" data-t="E"></span>:</p>
+<div class="calc" data-t="\r{n} = \f{z_{\f{α}{2}} · σ}{E}"></div>
+<p>Se elevan al cuadrado los dos miembros:</p><div class="box def"><div class="lbl">Tamaño de muestra</div>
+<div class="calc" data-t="n = \p{\f{z_{\f{α}{2}} · σ}{E}}^{2}"></div>
+<p>El resultado se redondea siempre <strong>hacia arriba</strong>, porque con menos datos el margen quedaría más grande que el pedido.</p></div>
+<p>Ejemplo: se quiere estimar la duración media de las sesiones con un margen de error de medio minuto y 95 % de confianza. Se sabe que <span class="mi" data-t="σ = 4"></span> minutos.</p>
+<div class="calc" data-t="n = \p{\f{z_{\f{α}{2}} · σ}{E}}^{2} = \p{\f{1,96 · 4}{0,5}}^{2} = \p{\f{7,84}{0,5}}^{2} = 15,68^{2} = 245,8624"></div>
+<p>Hacen falta 246 sesiones.</p>
+<div class="xp" id="ns-lab">
+  <div class="ctl">
+    <div class="fld"><label for="ns-s">Desvío</label><input type="text" inputmode="decimal" id="ns-s" value="4"></div>
+    <div class="fld"><label for="ns-e">Margen de error deseado</label><input type="text" inputmode="decimal" id="ns-e" value="0,5"></div>
+    <div class="fld"><label for="ns-c">Confianza</label><select id="ns-c"><option value="90">90 %</option><option value="95" selected>95 %</option><option value="96">96 %</option><option value="98">98 %</option><option value="99">99 %</option></select></div>
+  </div>
+  <p class="msg" id="ns-msg" role="status" aria-live="polite"></p>
+  <div class="panel" id="ns-panel"></div>
+  <p id="ns-read" style="margin:10px 0 0"></p>
+</div><div class="box doc"><div class="lbl">Lo que cuesta la precisión</div>
+<p>Probá pedir la mitad del margen (0,25 en lugar de 0,5): la muestra necesaria se multiplica por cuatro. Como <span class="mi" data-t="E"></span> está dividiendo dentro de un cuadrado, cada vez que se quiere el doble de precisión hacen falta cuatro veces más datos. Por eso en la práctica se elige un margen razonable y no el más chico posible.</p></div></section><section class="card"><h3><span class="n">5.7</span>Para comprobar</h3><div class="quiz" data-si="Correcto: esa muestra no es aleatoria." data-no="En esa situación sí corresponde. Fijate cómo se eligió la muestra en cada caso; después mirá la explicación."><p>¿En cuál de estas situaciones <strong>no</strong> corresponde usar el intervalo de confianza para la media tal como lo vimos?</p><div class="opts"><button class="opt long" data-opt>Duración media de las baterías de una fábrica, con 50 baterías elegidas al azar.</button><button class="opt long" data-opt data-ok>Tiempo medio de uso de una aplicación, con 40 usuarios que se ofrecieron a contestar una encuesta.</button><button class="opt long" data-opt>Peso medio de los paquetes que llena una máquina, con 36 paquetes elegidos al azar.</button><button class="opt long" data-opt>Estatura media de los alumnos de un instituto, con 100 alumnos sorteados de la lista.</button></div><p class="fb" role="status" aria-live="polite"></p><div class="step" hidden><button class="step-h" data-step aria-expanded="false"><span class="b">VER</span><span class="tt">Resolución paso a paso</span><span class="ch" aria-hidden="true">▾</span></button><div class="step-b">
+<p>En tres de las situaciones la muestra se eligió al azar y tiene 30 elementos o más: se cumplen las condiciones.</p>
+<p>En la encuesta, los 40 usuarios se ofrecieron solos. Los que eligen contestar suelen ser los que más usan la aplicación, así que su media probablemente sea más alta que la de todos los usuarios. El intervalo saldría centrado en un valor corrido, y ninguna fórmula lo corrige. Antes de calcular hay que preguntarse cómo se obtuvieron los datos.</p></div></div></div></section></div>
 <div class="tab-content" id="enun" role="tabpanel" aria-labelledby="tab-enun" hidden><div class="banner"><div class="eyebrow">Práctica</div><h2>Enunciados</h2><p>Los cuatro ejercicios de la guía de estimación por intervalos de confianza para la media. Intentá resolverlos antes de abrir la resolución.</p></div><article class="ejercicio" data-ej="1"><div class="ej-header"><span class="ej-badge">Ejercicio 1 · Media y desvío</span><span class="ej-lab"><span class="bullet"></span><span class="lab">laboratorio</span><span class="best">best</span><span class="ia">-IA</span></span></div><div class="ej-enun"><p>Dadas las siguientes 40 puntuaciones:</p><div class="datos"><span>27</span><span>16</span><span>18</span><span>26</span><span>18</span><span>28</span><span>25</span><span>20</span><span>24</span><span>26</span><span>10</span><span>8</span><span>14</span><span>16</span><span>18</span><span>8</span><span>12</span><span>14</span><span>9</span><span>7</span><span>16</span><span>18</span><span>12</span><span>15</span><span>9</span><span>13</span><span>17</span><span>20</span><span>21</span><span>19</span><span>26</span><span>24</span><span>17</span><span>23</span><span>25</span><span>22</span><span>16</span><span>15</span><span>18</span><span>23</span></div><ol><li>¿Cuál es la puntuación media?</li><li>¿Cuál es el desvío?</li></ol></div><p class="rta">Respuesta de la guía: media <b>17,825</b> · desvío <b>5,856</b></p><div class="row"><button class="btn pri" data-go="res#res-1">Ver la resolución</button></div></article><article class="ejercicio" data-ej="2"><div class="ej-header"><span class="ej-badge">Ejercicio 2 · Intervalo con σ conocida</span><span class="ej-lab"><span class="bullet"></span><span class="lab">laboratorio</span><span class="best">best</span><span class="ia">-IA</span></span></div><div class="ej-enun"><p>La concentración promedio de zinc que se obtiene en una muestra de mediciones en 36 sitios diferentes de un río es de 2,6 gramos por mililitro. Calcular los intervalos de confianza del 95 % y del 99 % para la concentración media del zinc en el río. Suponer que la desviación estándar de la población es de 0,3 gramos por mililitro.</p></div><p class="rta">Respuesta de la guía: al 95 %, <b>L<sub>i</sub> = 2,502</b> y <b>L<sub>s</sub> = 2,697</b> · al 99 %, <b>L<sub>i</sub> = 2,471</b> y <b>L<sub>s</sub> = 2,728</b> (gramos por mililitro)</p><div class="row"><button class="btn pri" data-go="res#res-2">Ver la resolución</button></div></article><article class="ejercicio" data-ej="3"><div class="ej-header"><span class="ej-badge">Ejercicio 3 · Intervalo con σ conocida</span><span class="ej-lab"><span class="bullet"></span><span class="lab">laboratorio</span><span class="best">best</span><span class="ia">-IA</span></span></div><div class="ej-enun"><p>Una empresa de material eléctrico fabrica lamparitas que tienen una duración distribuida de forma aproximadamente normal, con una desviación estándar de 40 horas. Si una muestra de 45 lamparitas tiene una duración promedio de 780 horas, calcule un intervalo de confianza del 96 % para la media de la población de todas las lamparitas producidas por la empresa.</p></div><div class="row"><button class="btn pri" data-go="res#res-3">Ver la resolución</button></div></article><article class="ejercicio" data-ej="4"><div class="ej-header"><span class="ej-badge">Ejercicio 4 · Intervalo con s y error de estimación</span><span class="ej-lab"><span class="bullet"></span><span class="lab">laboratorio</span><span class="best">best</span><span class="ia">-IA</span></span></div><div class="ej-enun"><p>Las estaturas de una muestra aleatoria de 50 estudiantes del INSPT tienen una media de 174,5 centímetros y una desviación estándar de 6,9 centímetros.</p><ol><li>Construir un intervalo de confianza del 98 % para la estatura media de todos los estudiantes del INSPT.</li><li>¿Qué podemos afirmar con una confianza del 98 % acerca del posible tamaño de nuestro error, si estimamos que la estatura media de todos los estudiantes del INSPT es de 174,5 centímetros?</li></ol></div><div class="row"><button class="btn pri" data-go="res#res-4">Ver la resolución</button></div></article></div>
 <div class="tab-content" id="res" role="tabpanel" aria-labelledby="tab-res" hidden><div class="banner"><div class="eyebrow">Práctica</div><h2>Resoluciones paso a paso</h2><p>Cada paso dice qué se hace y por qué. Abrilos de a uno y compará con tu desarrollo.</p></div><div class="row" style="margin-bottom:18px"><button class="btn" data-go="res#res-1">Ejercicio 1</button><button class="btn" data-go="res#res-2">Ejercicio 2</button><button class="btn" data-go="res#res-3">Ejercicio 3</button><button class="btn" data-go="res#res-4">Ejercicio 4</button></div><article class="ejercicio" data-ej="1" id="res-1"><div class="ej-header"><span class="ej-badge">Ejercicio 1 · Media y desvío</span><span class="ej-lab"><span class="bullet"></span><span class="lab">laboratorio</span><span class="best">best</span><span class="ia">-IA</span></span></div><div class="ej-enun"><p>Dadas las siguientes 40 puntuaciones:</p><div class="datos"><span>27</span><span>16</span><span>18</span><span>26</span><span>18</span><span>28</span><span>25</span><span>20</span><span>24</span><span>26</span><span>10</span><span>8</span><span>14</span><span>16</span><span>18</span><span>8</span><span>12</span><span>14</span><span>9</span><span>7</span><span>16</span><span>18</span><span>12</span><span>15</span><span>9</span><span>13</span><span>17</span><span>20</span><span>21</span><span>19</span><span>26</span><span>24</span><span>17</span><span>23</span><span>25</span><span>22</span><span>16</span><span>15</span><span>18</span><span>23</span></div><ol><li>¿Cuál es la puntuación media?</li><li>¿Cuál es el desvío?</li></ol></div><div class="row"><button class="btn" data-all="1">Abrir todos los pasos</button><button class="btn" data-all="0">Cerrar todos</button></div><div class="step"><button class="step-h" data-step aria-expanded="false"><span class="b">PASO 1</span><span class="tt">Qué se pide y con qué fórmulas</span><span class="ch" aria-hidden="true">▾</span></button><div class="step-b">
 <p>Los 40 valores son una <strong>muestra</strong> de puntuaciones. Se piden dos estadísticos: la media, que dice alrededor de qué valor se ubican las puntuaciones, y el desvío, que dice cuánto se dispersan.</p>
@@ -583,7 +685,8 @@ figcaption{font-size:13px;color:var(--g600);margin-top:6px;text-align:center;pad
   var REL = '=≠<>≤≥⟺⟹⇒→∈≈';
   var BIN = '+−·×±';
   var WORDS = ['qnorm', 'máx', 'mín', 'log', 'ln'];
-  var ARGS = { f: 2, r: 1, o: 1, i: 1, b: 1, S: 2, k: 2 };
+  var ARGS = { f: 2, r: 1, o: 1, i: 1, b: 1, S: 2, k: 2, p: 1 };
+  function PAR(d) { return '<span class="par-w"><svg viewBox="0 0 10 100" preserveAspectRatio="none" aria-hidden="true"><path d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span>'; }
   var SQ = '<svg viewBox="0 0 10 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0.6 14.5 L2.8 14.5 L5.2 22.4 L9.4 1.2" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>';
 
   function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
@@ -618,6 +721,7 @@ figcaption{font-size:13px;color:var(--g600);margin-top:6px;text-align:center;pad
         else if (name === 'i') push('<i>' + esc(a[0]) + '</i>');
         else if (name === 'b') push('<span class="bar">' + M(a[0], 1) + '</span>');
         else if (name === 'S') push('<span class="sum"><span class="su">' + M(a[1], 1) + '</span><span class="sg">Σ</span><span class="sl">' + M(a[0], 1) + '</span></span>');
+        else if (name === 'p') push('<span class="par">' + PAR('M8.5 1.5 C2 22 2 78 8.5 98.5') + '<span class="par-b">' + M(a[0], 1) + '</span>' + PAR('M1.5 1.5 C8 22 8 78 1.5 98.5') + '</span>');
         else if (name === 'k') push('<span class="k-' + a[0] + '">' + M(a[1], 1) + '</span>');
         continue;
       }
@@ -626,8 +730,8 @@ figcaption{font-size:13px;color:var(--g600);margin-top:6px;text-align:center;pad
         if (s[i + 1] === '{') { var g2 = group(s, i + 1); body = g2[0]; nx = g2[1]; }
         else { body = s[i + 1]; nx = i + 2; }
         var tag = c === '^' ? 'sup' : 'sub';
-        var h = '<' + tag + '>' + M(body, 1) + '</' + tag + '>';
         var last = out.length ? out.pop() : '';
+        var h = '<' + tag + (last.indexOf('<span class="par">') === 0 ? ' class="hi"' : '') + '>' + M(body, 1) + '</' + tag + '>';
         if (last.indexOf('<span class="at">') === 0) out.push(last.slice(0, -7) + h + '</span>');
         else out.push('<span class="at">' + last + h + '</span>');
         prev = 'atom'; i = nx; continue;
@@ -655,7 +759,7 @@ figcaption{font-size:13px;color:var(--g600);margin-top:6px;text-align:center;pad
       if (BIN.indexOf(c) >= 0) {
         var unary = (prev === '' || prev === 'op' || prev === 'open' || prev === 'punct');
         if (unary) { out.push('<span class="ou">' + c + '</span>'); }
-        else { dropSpace(); out.push('<span class="ob">' + c + '</span>'); }
+        else { dropSpace(); out.push(((inner || c === '·' || c === '×') ? '' : '<wbr>') + '<span class="ob">' + c + '</span>'); }
         prev = 'op'; i++; skipSpaces(); continue;
       }
       if (c === ',') { dropSpace(); out.push('<span class="pc">,</span>'); prev = 'punct'; i++; skipSpaces(); continue; }
@@ -750,11 +854,14 @@ figcaption{font-size:13px;color:var(--g600);margin-top:6px;text-align:center;pad
     var c = JSON.parse(el.getAttribute('data-fig')), W = figW(), L = 34, R = 34, top = 40;
     var n = c.rows.length, base = top + 54 * n + 8, H = base + 50;
     function X(v) { return L + (v - c.lo) / (c.hi - c.lo) * (W - L - R); }
-    var h = svgEl('line', { x1: X(c.center), y1: 14, x2: X(c.center), y2: base, stroke: '#a85a15', 'stroke-width': 1.6, 'stroke-dasharray': '5 4' });
-    h += T(X(c.center) + 6, 24, XB + ' = ' + fmt(c.center, 4), { a: 'start', s: 14, f: '#a85a15', m: 1 });
+    var h = '';
+    if (c.center !== null) {
+      h += svgEl('line', { x1: X(c.center), y1: 14, x2: X(c.center), y2: base, stroke: '#a85a15', 'stroke-width': 1.6, 'stroke-dasharray': '5 4' });
+      h += T(X(c.center) + 6, 24, XB + ' = ' + fmt(c.center, 4), { a: 'start', s: 14, f: '#a85a15', m: 1 });
+    }
     c.rows.forEach(function (r, i) {
       var y = top + 54 * i + 30;
-      h += T(X(c.center), y - 13, r[0], { s: 13.5, w: 600, f: r[3] }).replace('<text ', '<text stroke="#f8fbff" stroke-width="6" paint-order="stroke" stroke-linejoin="round" ');
+      h += T(X((r[1] + r[2]) / 2), y - 13, r[0], { s: 13.5, w: 600, f: r[3] }).replace('<text ', '<text stroke="#f8fbff" stroke-width="6" paint-order="stroke" stroke-linejoin="round" ');
       h += svgEl('line', { x1: X(r[1]), y1: y, x2: X(r[2]), y2: y, stroke: r[3], 'stroke-width': 7, 'stroke-linecap': 'round' });
       h += T(X(r[1]) - 9, y + 5, fmt(r[1], c.dec), { a: 'end', s: 13.5, w: 600, f: '#0f2244' });
       h += T(X(r[2]) + 9, y + 5, fmt(r[2], c.dec), { a: 'start', s: 13.5, w: 600, f: '#0f2244' });
@@ -907,7 +1014,27 @@ figcaption{font-size:13px;color:var(--g600);margin-top:6px;text-align:center;pad
     setSvg($('ic-svg'), W, H, h);
     $('ic-read').innerHTML = 'Con ' + fmt(conf * 100, 0) + ' % de confianza, la media de la población está entre <strong>' + fmt(r.li, 4) + '</strong> y <strong>' + fmt(r.ls, 4) + '</strong>.';
   }
-  function redraw() { drawFigs(); renderSamples(); renderZ(zConf); renderIC(); }
+  /* ================= 4 · tamaño de muestra ================= */
+  function calcN(sd, E, conf) {
+    var z = zOf(conf), a = rnd(z * sd, 4), b = rnd(a / E, 4), n = rnd(b * b, 4);
+    return { z: z, a: a, b: b, n: n, N: Math.ceil(n - 1e-9) };
+  }
+  window.__calcN = calcN;
+  function renderNS() {
+    var sd = num('ns-s'), E = num('ns-e'), conf = +$('ns-c').value / 100, msg = '';
+    if (!(sd > 0)) msg = 'El desvío tiene que ser un número mayor que 0.';
+    else if (!(E > 0)) msg = 'El margen de error tiene que ser un número mayor que 0.';
+    $('ns-msg').textContent = msg;
+    if (msg) return;
+    var r = calcN(sd, E, conf), S = fmt(sd, 4), Es = fmt(E, 4), Z = fmt(r.z, 3), A = fmt(r.a, 4), B = fmt(r.b, 4), Nn = fmt(r.n, 4);
+    $('ns-panel').innerHTML =
+      ln('1 · Valor crítico', 'z_{\\f{α}{2}} = ' + Z) +
+      ln('2 · Numerador', 'z_{\\f{α}{2}} · σ = ' + Z + ' · ' + S + ' ' + eq(r.z * sd, r.a) + ' ' + A) +
+      ln('3 · Cociente', '\\f{z_{\\f{α}{2}} · σ}{E} = \\f{' + A + '}{' + Es + '} ' + eq(r.a / E, r.b) + ' ' + B) +
+      ln('4 · Cuadrado', 'n = ' + B + '^{2} ' + eq(r.b * r.b, r.n) + ' ' + Nn);
+    $('ns-read').innerHTML = (r.N === r.n ? 'El resultado ya es entero: hacen' : 'Redondeando hacia arriba, hacen') + ' falta <strong>' + r.N + '</strong> datos para tener un margen de error de ' + Es + ' con ' + fmt(conf * 100, 0) + ' % de confianza.';
+  }
+  function redraw() { drawFigs(); renderSamples(); renderZ(zConf); renderIC(); renderNS(); }
 
   /* ================= eventos ================= */
   document.addEventListener('click', function (e) {
@@ -928,6 +1055,7 @@ figcaption{font-size:13px;color:var(--g600);margin-top:6px;text-align:center;pad
   document.addEventListener('input', function (e) {
     if (e.target.id === 'z-range') renderZ(+e.target.value / 100);
     else if (e.target.closest('#ic-lab')) renderIC();
+    else if (e.target.closest('#ns-lab')) renderNS();
   });
   document.querySelector('.tabs-nav').addEventListener('keydown', function (e) {
     if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
@@ -957,6 +1085,11 @@ figcaption{font-size:13px;color:var(--g600);margin-top:6px;text-align:center;pad
     r = calcIC(780, 40, 45, 0.96); chk('e3-se', r.se, 5.9628); chk('e3-E', r.E, 12.2476); chk('e3-E3', rnd(2.054 * 5.963, 3), 12.248); chk('e4-E3', rnd(2.326 * 0.976, 2), 2.27); chk('e3-li', rnd(r.li, 2), 767.75); chk('e3-ls', rnd(r.ls, 2), 792.25);
     r = calcIC(174.5, 6.9, 50, 0.98); chk('e4-se', r.se, 0.9758); chk('e4-E', r.E, 2.2697); chk('e4-li', rnd(r.li, 2), 172.23); chk('e4-ls', rnd(r.ls, 2), 176.77);
     r = calcIC(12.5, 4, 64, 0.95); chk('ej-li', r.li, 11.52); chk('ej-ls', r.ls, 13.48);
+    r = calcIC(14.6, 4, 64, 0.95); chk('abB-li', r.li, 13.62); chk('abB-ls', r.ls, 15.58);
+    r = calcIC(13.2, 4, 64, 0.95); chk('abC-li', r.li, 12.22); chk('abC-ls', r.ls, 14.18);
+    var q2 = calcN(4, 0.5, 0.95); chk('ns-n', q2.n, 245.8624); chk('ns-N', q2.N, 246); chk('ns-N4', calcN(4, 0.25, 0.95).N, 984);
+    function sdev(v) { var mm = v.reduce(function (a, b) { return a + b; }, 0) / v.length; return Math.sqrt(v.reduce(function (a, b) { return a + (b - mm) * (b - mm); }, 0) / (v.length - 1)); }
+    chk('srvA', rnd(sdev([190, 200, 200, 210, 200]), 2), 7.07); chk('srvB', rnd(sdev([80, 90, 100, 110, 620]), 2), 235.05);
     return f;
   };
 })();
